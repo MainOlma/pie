@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Dancing+Script:400,700&display=swap');
-$font:font-family: 'Abril Fatface', cursive;
-font-family: 'Dancing Script', cursive;
-body {
-  margin: 0;
+$font_abril: 'Abril Fatface', cursive;
+$font_dancing: 'Dancing Script', cursive;
+body,html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 code {
@@ -15,12 +18,204 @@ code {
     monospace;
 }
 
+.wrapper{
+  display: flex;
+min-height: 100vh;
+
+  flex-direction: row;
+  .left_side{
+    display: flex;
+    flex-direction: column;
+    background-color: #492F29;
+    width: 353px;
+    color: white;
+    padding: 49px 32px 32px;
+
+
+    .sticky_top{
+      position: sticky;
+      top: 49px;
+      min-height: inherit;
+    }
+
+    .sticky_bottom{
+      position: sticky;
+      bottom: 32px;
+    }
+
+    .unsticky{
+      flex:1;
+    }
+
+    h1,h2,h3{
+      margin: 0;
+    }
+
+    h1{
+      font-family: $font_abril;
+      font-size: 45px;
+      font-weight: 400;
+      line-height: 61px;
+      margin: 0 0 5px;
+    }
+
+    h2{
+      font-family: $font_dancing;
+      font-size: 32px;
+      font-weight: normal;
+      line-height: 90%;
+      margin-bottom: 35px;
+    }
+
+    h3{
+      font-family: $font_abril;
+      font-size: 25px;
+      font-weight: normal;
+      line-height: 34px;
+      margin-bottom: 10px;
+    }
+
+    .footer{
+      margin-top: auto;
+      font-family: $font_dancing;
+      font-size: 24px;
+      line-height: 90%;
+
+      a{
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+  .right_side{
+    flex-direction: column;
+  }
+  >div {display: flex;flex: 1;}
+}
+
+.triangle{
+  .texts text{
+
+    fill: white;
+    text-anchor: middle;
+    font-family: Arial;
+    font-size: 16px;
+
+    &.hovered{
+      transition: all ease 0.5s;
+      fill:black;
+    }
+  }
+
+  text{
+    font-family: $font_dancing;
+    font-size: 32px;
+    text-anchor: start;
+    fill: white;
+  }
+
+  line{
+    stroke-linecap: round;
+    stroke-width: 1;
+    stroke:white;
+    &.hovered{
+      transition: all ease 0.5s;
+      stroke-width: 17;
+    }
+  }
+
+  circle{
+    fill:#492F29;
+    &.hovered{
+      transition: all ease 0.5s;
+      fill:white;
+    }
+  }
+
+
+}
+
+.pies{
+  display: flex;
+  flex-wrap: wrap;
+
+  .line_breaker {
+    flex-basis: 100%;
+  }
+
+  .pies_in_month{
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+    height: 180px;
+    justify-content: flex-end;
+  }
+
+  .pies_list{
+    display: flex;
+  }
+
+  .month_name{
+    font-family: $font_dancing;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 90%;
+    border-left: 0.357076px solid #000000;
+    padding-left: 8px;
+  }
+  .wrapPie{
+    margin-right: -25px;
+    margin-bottom: -10px;
+  }
+}
+
+span.year2018, span.year2019, span.year2020{
+  display: none;
+  font-weight: bold;
+  font-size: 47.8482px;
+  line-height: 57px;
+  &.visible{
+    display: inherit;
+  }
+}
+
+.activeItem {
+  transition: all ease 0.5s;
+  opacity: 1;
+}
+
+.unactiveItem {
+  transition: all ease 0.5s;
+  opacity: 0.5;
+}
+
+
+
 .tooltip{
  position: absolute;
-  background: white;
-  border: 1px solid black;
+
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+
+  img{
+    z-index: 2;
+
+  }
+  .details{
+    background: white;
+    border: 1px solid black;
+    margin-top: -128px;
+    padding-top: 128px;
+    border-top: none;
+    z-index: 1;
+  }
 }
 
 .pie{
-  padding: 0 10px;
+  padding: 0 3px 0 0;
+}
+
+#root{
+  font-family: $font_abril;
 }
