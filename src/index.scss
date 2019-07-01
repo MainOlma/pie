@@ -145,10 +145,8 @@ min-height: 100vh;
 
   .pies_in_month{
     display: flex;
-    flex-direction: column;
-    flex: 0;
-    height: 180px;
-    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
   }
 
   .pies_list{
@@ -160,8 +158,8 @@ min-height: 100vh;
     font-weight: bold;
     font-size: 24px;
     line-height: 90%;
-    border-left: 0.357076px solid #000000;
     padding-left: 8px;
+    display: flex;
   }
   .wrapPie{
     margin-right: -25px;
@@ -169,7 +167,7 @@ min-height: 100vh;
   }
 }
 
-span.year2018, span.year2019, span.year2020{
+span.year{
   display: none;
   font-weight: bold;
   font-size: 47.8482px;
@@ -177,6 +175,12 @@ span.year2018, span.year2019, span.year2020{
   &.visible{
     display: inherit;
   }
+}
+
+span.month{
+  transform: rotate(-90deg);
+  height: 2em;
+  width: 2em;
 }
 
 .activeItem {
@@ -213,7 +217,7 @@ span.year2018, span.year2019, span.year2020{
 }
 
 .pie{
-  padding: 0 3px 0 0;
+  padding: 41px 3px 0 0;
 }
 
 #root{

@@ -78,6 +78,12 @@ function Triangle(props) {
                     .attr("cy", i * 20 + j * 20 + start_y - 5)
                     .classed( fill_1, true)
                     .classed( fill_2, true)
+                    .on("mouseover", function () {
+                        props.selectedFill({f1:fill_1,f2:fill_2})
+                    })
+                    .on("mouseout", function () {
+                        props.selectedFill({f1:"none",f2:"none"})
+                    })
 
                 g_texts.append("text")
                     .attr("x", xx * 20 + hor_gap + 5)
@@ -85,6 +91,7 @@ function Triangle(props) {
                     .text(()=> (filter.length + filter2.length>0) ? filter.length + filter2.length : "")
                     .classed("row_" + fill_1, true)
                     .classed("col_" + fill_2, true)
+                    .attr("pointer-events","none")
 
                 table.push({
                         fill_1: fill_1,
@@ -112,12 +119,12 @@ function Triangle(props) {
 
         })
         popular_fills_names.forEach((fill_1, i) => {
-            console.log(fill_1)
+
             svg.selectAll("text." + fill_1).on("mouseover", function () {
 
                 const selectedFill=d3.select(this).attr("class")
 
-                props.selectedFill(selectedFill)
+                props.selectedFill({f1:selectedFill,f2:"none"})
 
                 svg.selectAll("text").classed("hovered", false)
                 d3.select(this).classed("hovered", true)
@@ -131,13 +138,9 @@ function Triangle(props) {
                 g_texts.selectAll("circle").classed("hovered", false)
                 g_texts.selectAll("circle." + selectedFill).classed("hovered", true)
 
-                //pie_container.selectAll("span").style("color", "black")
-
-                //pie_container.selectAll("span." + d3.select(this).attr("class")).style("color", "red")
-
             })
                 .on("mouseout", function () {
-                    props.selectedFill("none")
+                    props.selectedFill({f1:"none",f2:"none"})
                     svg.selectAll("text").classed("hovered", false)
                     g_lines.selectAll("line").classed("hovered", false)
                     g_texts.selectAll("circle").classed("hovered", false)
