@@ -207,7 +207,7 @@ function App() {
                     + "<div class='alec'> — Will Alec eat it? <br> — "+d.alec+"</div></div>"
             })
                 .style("left", d3.select(this).node().getBoundingClientRect().left - 88 + "px")
-                .style("top", d3.select(this).node().getBoundingClientRect().top+window.scrollY + 140 + "px")
+                .style("top", d3.select(this).node().getBoundingClientRect().top+window.scrollY + 130 + "px")
                 //.classed("hovered", true)
                 .on("mouseenter",function () {
                     console.log("hovered", this)
