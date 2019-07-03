@@ -129,7 +129,7 @@ function App() {
                 const formatMonth = d3.timeFormat("%B")
                 const formatYear = d3.timeFormat("%Y")
                 const parseTime = d3.timeParse("%Y %B")
-                const month = "<span class='month'>"+formatMonth(parseTime(d.key))+"</span>"
+                const month = "<span class='month_wrapper'><span class='month'>"+formatMonth(parseTime(d.key))+"</span></span>"
                 const year = "<span class='year year"+formatYear(parseTime(d.key))+"'>"+formatYear(parseTime(d.key))+"</span>"
                 return year + month
             })
@@ -149,18 +149,19 @@ function App() {
 
 
          month_div.append("div").classed("pies_list", true).selectAll("span.pie").data(d => d.values).enter().append("span").classed("pie", true)
-            .html((e) => {
-                console.log(images[e.name+".png"])
+            .html((e,i,a) => {
                 const pie_img = (images[e.name+".png"]) ? images[e.name+".png"] : pie
                 e.pie_img=pie_img
-                return "<img alt='"+e.name+"' src=\""+pie_img+"\" width='88' height='88'>"
+                const formatDay = d3.timeFormat("%e")
+                const parseTime = d3.timeParse("%Y %B %e")
+                return "<span class='"+wrapClass(e,a[i+1])+hideClass(e,a[i-1])+"'>"+formatDay(e.date)+"</span><img alt='"+e.name+"' src=\""+pie_img+"\" width='88' height='88'>"
             })
             .attr("class", (d, i, a) => "pie " + d.fill_1 + " " + d.fill_2 + " " + d.mod_fill_1 + " " + d.mod_fill_2+ " " + activeClass(d.fill_1, d.fill_2) + wrapClass(d,a[i+1]))
             .on("mouseover", showDetail)
             .on("mouseout", hideDetail)
 
         let month_wrappers=pie_container.node().querySelectorAll('.pies_in_month')
-        console.log("wrappers ", month_wrappers.length);
+
         month_wrappers.forEach((wrapper) => {
                 unwrap(wrapper);
             });
@@ -199,7 +200,7 @@ function App() {
                     + "fill 2: " + d.fill_2 + "<br>"
                 +"</div>")
                 .style("left", d3.select(this).node().getBoundingClientRect().left - 88 + "px")
-                .style("top", d3.select(this).node().getBoundingClientRect().top + 50 + "px")
+                .style("top", d3.select(this).node().getBoundingClientRect().top+window.scrollY + 150 + "px")
         }
 
         function hideDetail(d) {
@@ -231,6 +232,12 @@ console.log("selected fill: ",value)
     const wrapClass = (d,g) =>{
         if (g && d.date.getTime() === g.__data__.date.getTime()) {
             return " wrapPie "
+        }
+    }
+
+    const hideClass = (d,g) =>{
+        if (g && d.date.getTime() === g.__data__.date.getTime()) {
+            return " invisibleNumber "
         }
     }
 

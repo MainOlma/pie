@@ -138,6 +138,9 @@ min-height: 100vh;
 .pies{
   display: flex;
   flex-wrap: wrap;
+  padding-right: 160px;
+  padding-bottom: 256px;
+  padding-left: 32px;
 
   .line_breaker {
     flex-basis: 100%;
@@ -160,10 +163,15 @@ min-height: 100vh;
     line-height: 90%;
     padding-left: 8px;
     display: flex;
+    padding-top: 40px;
+    align-items: center;
   }
   .wrapPie{
-    margin-right: -25px;
-    margin-bottom: -10px;
+    margin-right: -44px;
+  }
+
+  .invisibleNumber{
+    opacity: 0;
   }
 }
 
@@ -172,15 +180,24 @@ span.year{
   font-weight: bold;
   font-size: 47.8482px;
   line-height: 57px;
+
   &.visible{
     display: inherit;
+    margin-right: 15px;
   }
 }
 
 span.month{
   transform: rotate(-90deg);
-  height: 2em;
+  height: 1em;
+
+}
+
+span.month_wrapper{
+  align-items: center;
+  display: flex;
   width: 2em;
+  justify-content: center;
 }
 
 .activeItem {
@@ -218,6 +235,22 @@ span.month{
 
 .pie{
   padding: 41px 3px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  img{
+    box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.5);
+    border-radius: 357.076px;
+  }
+
+  span{
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 100%;
+    font-weight: normal;
+  }
 }
 
 #root{
