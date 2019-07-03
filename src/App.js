@@ -153,7 +153,7 @@ function App() {
                 e.pie_img=pie_img
                 const formatDay = d3.timeFormat("%e")
                 const parseTime = d3.timeParse("%Y %B %e")
-                return "<span class='"+wrapClass(e,a[i+1])+hideClass(e,a[i-1])+"'>"+formatDay(e.date)+"</span><img alt='"+e.name+"' src=\""+pie_img+"\" width='88' height='88'>"
+                return "<span class='number "+wrapClass(e,a[i+1])+hideClass(e,a[i-1])+"'>"+formatDay(e.date)+"</span><img alt='"+e.name+"' src=\""+pie_img+"\" width='88' height='88'>"
             })
             .attr("class", (d, i, a) => "pie " + d.fill_1 + " " + d.fill_2 + " " + d.mod_fill_1 + " " + d.mod_fill_2+ " " + activeClass(d.fill_1, d.fill_2) + wrapClass(d,a[i+1]))
             .on("mouseenter", showDetail)
