@@ -110,7 +110,6 @@ function App() {
         }
 
         const images = importAll(require.context('./img', false, /\.(png|jpe?g|svg)$/));
-        debugger
 
         let pie_container = d3.select(pieContainer_ref.current)
 
@@ -157,8 +156,8 @@ function App() {
                 return "<span class='"+wrapClass(e,a[i+1])+hideClass(e,a[i-1])+"'>"+formatDay(e.date)+"</span><img alt='"+e.name+"' src=\""+pie_img+"\" width='88' height='88'>"
             })
             .attr("class", (d, i, a) => "pie " + d.fill_1 + " " + d.fill_2 + " " + d.mod_fill_1 + " " + d.mod_fill_2+ " " + activeClass(d.fill_1, d.fill_2) + wrapClass(d,a[i+1]))
-            .on("mouseover", showDetail)
-            .on("mouseout", hideDetail)
+            .on("mouseenter", showDetail)
+            .on("mouseleave", hideDetail)
 
         let month_wrappers=pie_container.node().querySelectorAll('.pies_in_month')
 
@@ -190,21 +189,44 @@ function App() {
 
 
 
-        function showDetail(d) {
+        function showDetail(dd) {
+            d3.select(".tooltip").remove()
+            console.log("hover")
             d3.select("body").append("div").classed("tooltip", true)
-                .html("<img  alt='"+d.name+"' src='"+d.pie_img+"' width='256' height='256'> <div class='details'>"
-                    + "crust: " + d.crust + "<br>"
-                    + "alec: " + d.alec + "<br>"
-                    //+ "date: " + d.date + "<br>"
-                    + "fill 1: " + d.fill_1 + "<br>"
-                    + "fill 2: " + d.fill_2 + "<br>"
-                +"</div>")
+                .html(() =>
+            {
+                const d =dd
+                const formatDay = d3.timeFormat("%A, %B %e, %Y")
+
+                return "<img  alt='"+d.name + "' src='" + d.pie_img + "' width='256' height='256'> <div class='details'>"
+                    + "<div class='date'>" +formatDay(d.date) + "</div>"
+                    + "<div class='name'><a href='"+d.recipe+"'>" +d.name + "</a></div>"
+                    + "<div class='fill'>" +d.fill_1 + ((d.fill_2!='None' && d.fill_1!=d.fill_2) ? " and "+d.fill_2 : "") + ", "+ ((d.crust===1) ? "one crust" : "two crusts")+"</div>"
+                    + ((d.notes) ? "<div class='notes'>"+d.notes+"</div>" : "")
+                    + "<div class='is_pie'> — Is this pie? <br> — "+d.is_pie+"</div>"
+                    + "<div class='alec'> — Will Alec eat it? <br> — "+d.alec+"</div></div>"
+            })
                 .style("left", d3.select(this).node().getBoundingClientRect().left - 88 + "px")
-                .style("top", d3.select(this).node().getBoundingClientRect().top+window.scrollY + 150 + "px")
+                .style("top", d3.select(this).node().getBoundingClientRect().top+window.scrollY + 140 + "px")
+                //.classed("hovered", true)
+                .on("mouseenter",function () {
+                    console.log("hovered", this)
+                    d3.select(this).classed("hovered", true)
+                })
+                .on("mouseleave",function () {
+
+                    d3.select(this).classed("hovered", false)
+                    d3.select(this).classed("not_hovered", true)
+                    console.log("not hovered",this)
+                   d3.select(this).remove()
+                })
         }
 
         function hideDetail(d) {
-            d3.select(".tooltip").remove()
+           if (d3.select(".tooltip").classed("not_hovered"))
+
+
+           d3.selectAll(".tooltip").remove()
         }
 
     }
@@ -212,9 +234,7 @@ function App() {
 
 
     const handleSelectedFill = (value) =>{
-console.log("selected fill: ",value)
         setSelectedFill(value)
-
     }
 
     const activeClass = (f1,f2) =>{
@@ -259,6 +279,7 @@ console.log("selected fill: ",value)
             </div>
             <div className="right_side">
                 <div className="pies" ref={pieContainer_ref}/>
+                <div className="bottom">Well done! Keep going!</div>
             </div>
 
         </div>);

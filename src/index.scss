@@ -27,7 +27,7 @@ min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #492F29;
-    width: 353px;
+    min-width: 353px;
     color: white;
     padding: 49px 32px 32px;
 
@@ -89,6 +89,21 @@ min-height: 100vh;
   }
   .right_side{
     flex-direction: column;
+    background: #EEEEEE;
+
+    .bottom{
+      height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font_dancing;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 32px;
+      line-height: 29px;
+      color: #492F29;
+
+    }
   }
   >div {display: flex;flex: 1;}
 }
@@ -139,7 +154,6 @@ min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
   padding-right: 160px;
-  padding-bottom: 256px;
   padding-left: 32px;
 
   .line_breaker {
@@ -221,15 +235,54 @@ span.month_wrapper{
 
   img{
     z-index: 2;
+    box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.5);
+    border-radius: 714.152px;
 
   }
   .details{
-    background: white;
-    border: 1px solid black;
+    display: block;
+    background: #FFFFFF;
+    box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.25);
+    border-radius: 0px 0px 16px 16px;
+    width: 224px;
+
     margin-top: -128px;
-    padding-top: 128px;
+    padding-top: 151px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 23px;
     border-top: none;
     z-index: 1;
+    color: #492F29;
+
+
+    .date{
+      font-family: Arial;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .name, .name a{
+      font-family: $font_abril;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 25px;
+      line-height: 28px;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 17px;
+      color: inherit;
+    }
+
+    .fill, .notes, .is_pie, .alec{
+      font-family: $font_dancing;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+      line-height:22px;
+      margin-bottom: 0.5em;
+    }
   }
 }
 
