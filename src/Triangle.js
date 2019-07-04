@@ -56,11 +56,11 @@ function Triangle(props) {
             let xx = 0
 
 
-            const hor_gap = 100,
+            const hor_gap = 105,
                 hor_gap_line = hor_gap + 25,
                 start_y = 25
 
-            svg.append("text").attr("x", xx * 20).attr("y", i * 40 + start_y).text(fill_1).classed(fill_1, true)
+            svg.append("text").attr("x", 0).attr("y", i * 31 + start_y).text(fill_1).classed(fill_1, true)
 
             for (var j = i; j <= popular_fills_names.length - 1; j++) {
 
@@ -73,21 +73,23 @@ function Triangle(props) {
 
 
                 g_texts.append("circle")
-                    .attr("r", (d)=>(filter.length + filter2.length>0) ? 8 : 0)
-                    .attr("cx", xx * 20 + hor_gap + 5)
-                    .attr("cy", i * 20 + j * 20 + start_y - 5)
+                    .attr("r", (d)=>(filter.length + filter2.length>0) ? 9 : 0)
+                    .attr("cx", xx * 15.5 + hor_gap + 10)
+                    .attr("cy", i * 15.5 + j * 15.5 + start_y -4.5)
                     .classed( fill_1, true)
                     .classed( fill_2, true)
                     .on("mouseover", function () {
+                        d3.select(this).classed("hovered",true)
                         props.selectedFill({f1:fill_1,f2:fill_2})
                     })
                     .on("mouseout", function () {
+                        d3.select(this).classed("hovered",false)
                         props.selectedFill({f1:"none",f2:"none"})
                     })
 
                 g_texts.append("text")
-                    .attr("x", xx * 20 + hor_gap + 5)
-                    .attr("y", i * 20 + j * 20 + start_y)
+                    .attr("x", xx * 15.5 + hor_gap + 10)
+                    .attr("y", i * 15.5 + j * 15.5 + start_y+1.5)
                     .text(()=> (filter.length + filter2.length>0) ? filter.length + filter2.length : "")
                     .classed("row_" + fill_1, true)
                     .classed("col_" + fill_2, true)
@@ -101,20 +103,18 @@ function Triangle(props) {
                 )
             }
 
-            g_lines.append("line")
+            g_lines.append("line")                         /*  \  */
                 .attr("x1", hor_gap_line)
-                .attr("y1", i * 40 + 20)
-                .attr("x2", xx * 20 + hor_gap_line - 15-5)
-                .attr("y2", i * 20 + j * 20-5+5)
-                .attr("stroke", "green")
+                .attr("y1", i * 31 +15.5+5)
+                .attr("x2", xx * 15.5 + hor_gap_line - 15.5)
+                .attr("y2", i * 15.5 + j * 15.5+4)
                 .attr("class", fill_1)
 
-            g_lines.append("line")
+            g_lines.append("line")                         /*  /  */
                 .attr("x1", hor_gap_line)
-                .attr("y1", i * 40 + 20)
-                .attr("x2", (i) * 20 + hor_gap_line)
-                .attr("y2", i * 40 + 20 - (7 - xx) * 20)
-                .attr("stroke", "blue")
+                .attr("y1", i * 31 + 15.5+5)
+                .attr("x2", (i) * 15.5 + hor_gap_line)
+                .attr("y2", i * 31 - (7 - xx) * 15.5 +20)
                 .attr("class", fill_1)
 
         })

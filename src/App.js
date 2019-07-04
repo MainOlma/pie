@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
 import './App.css';
-import pie from './img/pie.png';
+import pie from './img/no_image.png';
 
 
 
@@ -198,7 +198,7 @@ function App() {
                 const d =dd
                 const formatDay = d3.timeFormat("%A, %B %e, %Y")
 
-                return "<img  alt='"+d.name + "' src='" + d.pie_img + "' width='256' height='256'> <div class='details'>"
+                return "<img  alt='"+d.name + "' src=\""+d.pie_img+"\" width='256' height='256'> <div class='details'>"
                     + "<div class='date'>" +formatDay(d.date) + "</div>"
                     + "<div class='name'><a href='"+d.recipe+"'>" +d.name + "</a></div>"
                     + "<div class='fill'>" +d.fill_1 + ((d.fill_2!='None' && d.fill_1!=d.fill_2) ? " and "+d.fill_2 : "") + ", "+ ((d.crust===1) ? "one crust" : "two crusts")+"</div>"
