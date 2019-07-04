@@ -135,7 +135,7 @@ min-height: 100vh;
     stroke-width: 0.5;
     stroke:white;
     &.hovered{
-      transition: all ease 0.5s;
+      transition: all ease 0.1s;
       stroke-width: 18;
     }
   }
@@ -143,7 +143,7 @@ min-height: 100vh;
   circle{
     fill:#492F29;
     &.hovered{
-      transition: all ease 0.5s;
+      transition: all ease 0.1s;
       fill:white;
     }
   }
@@ -158,7 +158,7 @@ min-height: 100vh;
 .pies{
   display: flex;
   flex-wrap: wrap;
-  padding-right: 160px;
+  padding-right: 100px;
   padding-left: 32px;
 
   .line_breaker {
@@ -181,13 +181,38 @@ min-height: 100vh;
     font-weight: bold;
     font-size: 24px;
     line-height: 90%;
-    padding-left: 14px;
     display: flex;
     padding-top: 40px;
     align-items: center;
+
+    span.year{
+      display: none;
+      font-weight: bold;
+      font-size: 47.8482px;
+      line-height: 57px;
+
+      &.visible{
+        display: flex;
+        justify-content: center;
+        width: 134px;
+      }
+    }
+
+    span.month{
+      transform: rotate(-90deg);
+      height: 0.4em;
+
+    }
+
+    span.month_wrapper{
+      align-items: center;
+      display: flex;
+      width: 44px;
+      justify-content: center;
+    }
   }
   .wrapPie{
-    margin-right: -44px;
+    margin-right: -46px;
   }
 
   .invisibleNumber{
@@ -195,31 +220,7 @@ min-height: 100vh;
   }
 }
 
-span.year{
-  display: none;
-  font-weight: bold;
-  font-size: 47.8482px;
-  line-height: 57px;
 
-  &.visible{
-    display: inherit;
-    margin-right: 15px;
-    margin-top: 11px;
-  }
-}
-
-span.month{
-  transform: rotate(-90deg);
-  height: 0.4em;
-
-}
-
-span.month_wrapper{
-  align-items: center;
-  display: flex;
-  width: 2em;
-  justify-content: center;
-}
 
 .activeItem {
   transition: all ease 0.5s;
@@ -229,6 +230,8 @@ span.month_wrapper{
 .unactiveItem {
   transition: all ease 0.5s;
   opacity: 0.5;
+  -webkit-filter: blur(2px) grayscale(50%); /* Safari 6.0 - 9.0 */
+  filter: blur(2px) grayscale(50%);
 }
 
 

@@ -3,19 +3,12 @@ import * as d3 from 'd3';
 import './App.css';
 import pie from './img/no_image.png';
 
-
-
-//<img src={images['doggy.png']} />
-
 import Triangle from "./Triangle";
 
 function App() {
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
     }
-
-
-
 
     const pieContainer_ref = React.createRef()
 
@@ -45,7 +38,7 @@ function App() {
                         date: parseDate(el['Date served']),
                         alec: el['alec will eat it'],
                         crust: (el['one-crust'] && !el['two crust']) ? 1 : 2,
-                        img:el[Image],
+                        img: el[Image],
                         notes: el['Notes'],
                         is_pie: el['Is this pie?'],
                         recipe: el['Recipe'],
@@ -66,7 +59,6 @@ function App() {
                 setData(mydata)
                 setFills(fills)
 
-
             })
 
         }
@@ -78,34 +70,35 @@ function App() {
     /*change state on hover of triangle table*/
     useEffect(() => {
         drawListOfPies(data);
-    },[data])
+    }, [data])
 
     /*effect when nothing is hoveread or hovered a number*/
-    useEffect(()=>{
-        if (selectedFill.f1==="none") d3.selectAll("span.pie").classed("activeItem",true).classed("unactiveItem",false)
+    useEffect(() => {
+        if (selectedFill.f1 === "none") d3.selectAll("span.pie").classed("activeItem", true).classed("unactiveItem", false)
         else {
-            d3.selectAll("span.pie").classed("unactiveItem",true)
+            d3.selectAll("span.pie").classed("unactiveItem", true)
 
-            if (selectedFill.f2==="none"){
-                d3.selectAll("span.pie."+selectedFill.f1).classed("unactiveItem",false)
-            }
-            else {
+            if (selectedFill.f2 === "none") {
+                d3.selectAll("span.pie." + selectedFill.f1).classed("unactiveItem", false)
+            } else {
                 d3.selectAll("span.pie")
                     .filter((d) =>
                         (d.mod_fill_1 === selectedFill.f1 && d.mod_fill_2 === selectedFill.f2)
                         || (d.mod_fill_1 === selectedFill.f2 && d.mod_fill_2 === selectedFill.f1)
-                        || (d.mod_fill_1 === selectedFill.f1 && d.mod_fill_2 === "None" && selectedFill.f1===selectedFill.f2))
-                .classed("unactiveItem",false)
+                        || (d.mod_fill_1 === selectedFill.f1 && d.mod_fill_2 === "None" && selectedFill.f1 === selectedFill.f2))
+                    .classed("unactiveItem", false)
             }
 
         }
     })
 
-    const drawListOfPies = (data) =>{
+    const drawListOfPies = (data) => {
 
         function importAll(r) {
             let images = {};
-            r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+            r.keys().map((item, index) => {
+                images[item.replace('./', '')] = r(item);
+            });
             return images;
         }
 
@@ -119,23 +112,21 @@ function App() {
             return format(d.date);
         }).entries(data)
 
-        //console.log("pie by date", nested_by_date)
-
-        const month_div = pie_container.selectAll("div.pies_in_month").data(nested_by_date).enter().append("div").classed("pies_in_month",true)
+        const month_div = pie_container.selectAll("div.pies_in_month").data(nested_by_date).enter().append("div").classed("pies_in_month", true)
 
         month_div.append("div").classed("month_name", true)
             .html((d) => {
                 const formatMonth = d3.timeFormat("%B")
                 const formatYear = d3.timeFormat("%Y")
                 const parseTime = d3.timeParse("%Y %B")
-                const month = "<span class='month_wrapper'><span class='month'>"+formatMonth(parseTime(d.key))+"</span></span>"
-                const year = "<span class='year year"+formatYear(parseTime(d.key))+"'>"+formatYear(parseTime(d.key))+"</span>"
+                const month = "<span class='month_wrapper'><span class='month'>" + formatMonth(parseTime(d.key)) + "</span></span>"
+                const year = "<span class='year year" + formatYear(parseTime(d.key)) + "'>" + formatYear(parseTime(d.key)) + "</span>"
                 return year + month
             })
 
-        pie_container.selectAll(".year2018").filter((d, i) => i == 0).classed("visible",true)
-        pie_container.selectAll(".year2019").filter((d, i) => i == 0).classed("visible",true)
-        pie_container.selectAll(".year2020").filter((d, i) => i == 0).classed("visible",true)
+        pie_container.selectAll(".year2018").filter((d, i) => i == 0).classed("visible", true)
+        pie_container.selectAll(".year2019").filter((d, i) => i == 0).classed("visible", true)
+        pie_container.selectAll(".year2020").filter((d, i) => i == 0).classed("visible", true)
 
         if (pie_container.select(".year2019").node()) {
             const element = pie_container.select(".year2019").node().parentNode.parentNode
@@ -147,30 +138,27 @@ function App() {
         }
 
 
-         month_div.append("div").classed("pies_list", true).selectAll("span.pie").data(d => d.values).enter().append("span").classed("pie", true)
-            .html((e,i,a) => {
-                const pie_img = (images[e.name+".png"]) ? images[e.name+".png"] : pie
-                e.pie_img=pie_img
+        month_div.append("div").classed("pies_list", true).selectAll("span.pie").data(d => d.values).enter().append("span").classed("pie", true)
+            .html((e, i, a) => {
+                const pie_img = (images[e.name + ".png"]) ? images[e.name + ".png"] : pie
+                e.pie_img = pie_img
                 const formatDay = d3.timeFormat("%e")
                 const parseTime = d3.timeParse("%Y %B %e")
-                return "<span class='number "+wrapClass(e,a[i+1])+hideClass(e,a[i-1])+"'>"+formatDay(e.date)+"</span><img alt='"+e.name+"' src=\""+pie_img+"\" width='88' height='88'>"
+                return "<span class='number " + wrapClass(e, a[i + 1]) + hideClass(e, a[i - 1]) + "'>" + formatDay(e.date) + "</span><img alt='" + e.name + "' src=\"" + pie_img + "\" width='88' height='88'>"
             })
-            .attr("class", (d, i, a) => "pie " + d.fill_1 + " " + d.fill_2 + " " + d.mod_fill_1 + " " + d.mod_fill_2+ " " + activeClass(d.fill_1, d.fill_2) + wrapClass(d,a[i+1]))
+            .attr("class", (d, i, a) => "pie " + d.fill_1 + " " + d.fill_2 + " " + d.mod_fill_1 + " " + d.mod_fill_2 + " " + activeClass(d.fill_1, d.fill_2) + wrapClass(d, a[i + 1]))
             .on("mouseenter", showDetail)
             .on("mouseleave", hideDetail)
 
-        let month_wrappers=pie_container.node().querySelectorAll('.pies_in_month')
-
+        let month_wrappers = pie_container.node().querySelectorAll('.pies_in_month')
         month_wrappers.forEach((wrapper) => {
-                unwrap(wrapper);
-            });
-
-        let pie_wrappers=pie_container.node().querySelectorAll('.pies_list')
-        pie_wrappers.forEach((wrapper) => {
             unwrap(wrapper);
         });
 
-
+        let pie_wrappers = pie_container.node().querySelectorAll('.pies_list')
+        pie_wrappers.forEach((wrapper) => {
+            unwrap(wrapper);
+        });
 
         function unwrap(wrapper) {
             if (wrapper) {
@@ -186,103 +174,100 @@ function App() {
             }
         }
 
-
-
-
         function showDetail(dd) {
             d3.select(".tooltip").remove()
             console.log("hover")
             d3.select("body").append("div").classed("tooltip", true)
-                .html(() =>
-            {
-                const d =dd
-                const formatDay = d3.timeFormat("%A, %B %e, %Y")
+                .html(() => {
+                    const d = dd
+                    const formatDay = d3.timeFormat("%A, %B %e, %Y")
 
-                return "<img  alt='"+d.name + "' src=\""+d.pie_img+"\" width='256' height='256'> <div class='details'>"
-                    + "<div class='date'>" +formatDay(d.date) + "</div>"
-                    + "<div class='name'><a href='"+d.recipe+"'>" +d.name + "</a></div>"
-                    + "<div class='fill'>" +d.fill_1 + ((d.fill_2!='None' && d.fill_1!=d.fill_2) ? " and "+d.fill_2 : "") + ", "+ ((d.crust===1) ? "one crust" : "two crusts")+"</div>"
-                    + ((d.notes) ? "<div class='notes'>"+d.notes+"</div>" : "")
-                    + "<div class='is_pie'> — Is this pie? <br> — "+d.is_pie+"</div>"
-                    + "<div class='alec'> — Will Alec eat it? <br> — "+d.alec+"</div></div>"
-            })
+                    return "<img  alt='" + d.name + "' src=\"" + d.pie_img + "\" width='256' height='256'> <div class='details'>"
+                        + "<div class='date'>" + formatDay(d.date) + "</div>"
+                        + "<div class='name'><a href='" + d.recipe + "'>" + d.name + "</a></div>"
+                        + "<div class='fill'>" + d.fill_1 + ((d.fill_2 != 'None' && d.fill_1 != d.fill_2) ? " and " + d.fill_2 : "") + ", " + ((d.crust === 1) ? "one crust" : "two crusts") + "</div>"
+                        + ((d.notes) ? "<div class='notes'>" + d.notes + "</div>" : "")
+                        + "<div class='is_pie'> — Is this pie? <br> — " + d.is_pie + "</div>"
+                        + "<div class='alec'> — Will Alec eat it? <br> — " + d.alec + "</div></div>"
+                })
                 .style("left", d3.select(this).node().getBoundingClientRect().left - 88 + "px")
-                .style("top", d3.select(this).node().getBoundingClientRect().top+window.scrollY + 130 + "px")
+                .style("top", d3.select(this).node().getBoundingClientRect().top + window.scrollY + 130 + "px")
                 //.classed("hovered", true)
-                .on("mouseenter",function () {
+                .on("mouseenter", function () {
                     console.log("hovered", this)
                     d3.select(this).classed("hovered", true)
                 })
-                .on("mouseleave",function () {
+                .on("mouseleave", function () {
 
                     d3.select(this).classed("hovered", false)
                     d3.select(this).classed("not_hovered", true)
-                    console.log("not hovered",this)
-                   d3.select(this).remove()
+                    console.log("not hovered", this)
+                    d3.select(this).remove()
                 })
         }
 
         function hideDetail(d) {
-           if (d3.select(".tooltip").classed("not_hovered"))
-
-
-           d3.selectAll(".tooltip").remove()
+            if (d3.select(".tooltip").classed("not_hovered"))
+                d3.selectAll(".tooltip").remove()
         }
 
     }
 
 
-
-    const handleSelectedFill = (value) =>{
+    const handleSelectedFill = (value) => {
         setSelectedFill(value)
     }
 
-    const activeClass = (f1,f2) =>{
+    const activeClass = (f1, f2) => {
 
-        if ((f1===selectedFill.f1 || f2===selectedFill.f1) && selectedFill.f2==="none")
-            {console.log(f1,f2,selectedFill)
-            return " activeItem "}
-        if (f1===selectedFill.f1 && f2===selectedFill.f2)
-        {console.log(f1,f2,selectedFill)
-            return " activeItem "}
+        if ((f1 === selectedFill.f1 || f2 === selectedFill.f1) && selectedFill.f2 === "none") {
+            console.log(f1, f2, selectedFill)
+            return " activeItem "
+        }
+        if (f1 === selectedFill.f1 && f2 === selectedFill.f2) {
+            console.log(f1, f2, selectedFill)
+            return " activeItem "
+        }
 
         return " unactiveItem "
     }
 
-    const wrapClass = (d,g) =>{
+    const wrapClass = (d, g) => {
         if (g && d.date.getTime() === g.__data__.date.getTime()) {
             return " wrapPie "
         }
     }
 
-    const hideClass = (d,g) =>{
+    const hideClass = (d, g) => {
         if (g && d.date.getTime() === g.__data__.date.getTime()) {
             return " invisibleNumber "
         }
     }
 
     return (<div>
-            <div className="left_side">
-                <div className="sticky_top">
+        <div className="left_side">
+            <div className="sticky_top">
                 <h1>The Pie Chart</h1>
                 <h2>The pies proudly eaten by the Stamen team</h2>
 
-                    <Triangle data={data} fills={fills} selectedFill={handleSelectedFill}/>
+                <Triangle data={data} fills={fills} selectedFill={handleSelectedFill}/>
 
-                </div>
-                <div className="unsticky" />
-                <div className="sticky_bottom">
-                    <div className="footer">
-                        Made by <a href="https://kmpny.github.io">Kompany</a>, <a href="https://docs.google.com/spreadsheets/d/1npXQKNySYcRpiwp3-Iug3ncmCUS9F813LoxZQzSbVLU/edit#gid=0">data</a> collected by <a href="https://stamen.com">Stamen</a>
-                    </div>
+            </div>
+            <div className="unsticky"/>
+            <div className="sticky_bottom">
+                <div className="footer">
+                    Made by <a href="https://kmpny.github.io">Kompany</a>, <a
+                    href="https://docs.google.com/spreadsheets/d/1npXQKNySYcRpiwp3-Iug3ncmCUS9F813LoxZQzSbVLU/edit#gid=0">data</a> collected
+                    by <a href="https://stamen.com">Stamen</a>
                 </div>
             </div>
-            <div className="right_side">
-                <div className="pies" ref={pieContainer_ref}/>
-                <div className="bottom">Well done! Keep going!</div>
-            </div>
+        </div>
+        <div className="right_side">
+            <div className="pies" ref={pieContainer_ref}/>
+            <div className="bottom">Well done! Keep going!</div>
+        </div>
 
-        </div>);
+    </div>);
 }
 
 export default App;
