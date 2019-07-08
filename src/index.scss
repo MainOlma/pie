@@ -236,33 +236,73 @@ min-height: 100vh;
 
 
 
-.tooltip{
- position: absolute;
 
-  width: 256px;
+
+.pie{
+  padding: 0px 3px 0 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+
+  .number{
+    padding-bottom: 3px;
+  }
+
 
   img{
-    z-index: 2;
     box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.5);
-    border-radius: 714.152px;
-
+    border-radius: 357.076px;
   }
-  .details{
-    display: block;
+
+  span{
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 100%;
+    font-weight: normal;
+  }
+}
+
+.pie{
+  border-radius: 999px;
+  position: relative;
+}
+
+.details{
+  background: pink;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0s linear;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+
+  .text{
+    background: pink;
+    // border: red 1px solid;
+    content: " ";
+    height: 0;
+    overflow-y: hidden;
+    left: 0%;
+    position: absolute;
+    top: 100%;
+    transition: height 200ms;
+    width: 100%;
+
+
     background: #FFFFFF;
     box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 16px 16px;
-    width: 224px;
+    //width: 224px;
 
-    margin-top: -128px;
-    padding-top: 151px;
+    //margin-top: -128px;
+    padding-top: 88px;
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 23px;
     border-top: none;
-    z-index: 1;
+    //z-index: 1;
     color: #492F29;
 
 
@@ -295,29 +335,31 @@ min-height: 100vh;
       margin-bottom: 0.2em;
     }
   }
+  .picture{
+    border-radius: 999px 999px 0 0;
+    content: " ";
+    height: 243%;
+    left: -88%;
+    pointer-events: none;
+    position: absolute;
+    top: -66%;
+    width: 282%;
+    z-index: 2;
+    background: white;
+  }
 }
 
-.pie{
-  padding: 24px 3px 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .number{
-    padding-bottom: 3px;
-  }
-
-
-  img{
-    box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.5);
-    border-radius: 357.076px;
-  }
-
-  span{
-    font-family: Arial;
-    font-size: 16px;
-    line-height: 100%;
-    font-weight: normal;
+.pie:hover {
+  .details{
+    visibility: visible;
+    opacity: 1;
+    .text{
+      height: 200%;
+      left: -88%;
+      top: 100%;
+      width: 247%;
+      display: block;
+    }
   }
 }
 

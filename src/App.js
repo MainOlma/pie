@@ -144,11 +144,10 @@ function App() {
                 e.pie_img = pie_img
                 const formatDay = d3.timeFormat("%e")
                 const parseTime = d3.timeParse("%Y %B %e")
-                return "<span class='number " + wrapClass(e, a[i + 1]) + hideClass(e, a[i - 1]) + "'>" + formatDay(e.date) + "</span><img alt='" + e.name + "' src=\"" + pie_img + "\" width='88' height='88'>"
+                const details = "<div class='details'>" + getDetail(e) + "</div>"
+                return "<span class='number " + wrapClass(e, a[i + 1]) + hideClass(e, a[i - 1]) + "'>" + formatDay(e.date) + "</span><img alt='" + e.name + "' src=\"" + pie_img + "\" width='88' height='88'>"+details
             })
             .attr("class", (d, i, a) => "pie " + d.fill_1 + " " + d.fill_2 + " " + d.mod_fill_1 + " " + d.mod_fill_2 + " " + activeClass(d.fill_1, d.fill_2) + wrapClass(d, a[i + 1]))
-            .on("mouseenter", showDetail)
-            .on("mouseleave", hideDetail)
 
         let month_wrappers = pie_container.node().querySelectorAll('.pies_in_month')
         month_wrappers.forEach((wrapper) => {
@@ -173,42 +172,17 @@ function App() {
                 wrapper.parentNode.replaceChild(docFrag, wrapper);
             }
         }
+        function getDetail(d){
+            const formatDay = d3.timeFormat("%A, %B %e, %Y")
+            const urlCheck = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
-        function showDetail(dd) {
-            d3.select(".tooltip").remove()
-            console.log("hover")
-            d3.select("body").append("div").classed("tooltip", true)
-                .html(() => {
-                    const d = dd
-                    const formatDay = d3.timeFormat("%A, %B %e, %Y")
-
-                    return "<img  alt='" + d.name + "' src=\"" + d.pie_img + "\" width='256' height='256'> <div class='details'>"
-                        + "<div class='date'>" + formatDay(d.date) + "</div>"
-                        + "<div class='name'><a href='" + d.recipe + "'>" + d.name + "</a></div>"
-                        + "<div class='fill'>" + d.fill_1 + ((d.fill_2 != 'None' && d.fill_1 != d.fill_2) ? " and " + d.fill_2 : "") + ", " + ((d.crust === 1) ? "one crust" : "two crusts") + "</div>"
-                        + ((d.notes) ? "<div class='notes'>" + d.notes + "</div>" : "")
-                        + "<div class='is_pie'> — Is this pie? <br> — " + d.is_pie + "</div>"
-                        + "<div class='alec'> — Will Alec eat it? <br> — " + d.alec + "</div></div>"
-                })
-                .style("left", d3.select(this).node().getBoundingClientRect().left - 88 + "px")
-                .style("top", d3.select(this).node().getBoundingClientRect().top + window.scrollY + 130 + "px")
-                //.classed("hovered", true)
-                .on("mouseenter", function () {
-                    console.log("hovered", this)
-                    d3.select(this).classed("hovered", true)
-                })
-                .on("mouseleave", function () {
-
-                    d3.select(this).classed("hovered", false)
-                    d3.select(this).classed("not_hovered", true)
-                    console.log("not hovered", this)
-                    d3.select(this).remove()
-                })
-        }
-
-        function hideDetail(d) {
-            if (d3.select(".tooltip").classed("not_hovered"))
-                d3.selectAll(".tooltip").remove()
+            return "<div class='picture'><img  alt='" + d.name + "' src=\"" + d.pie_img + "\" width='256' height='256'> </div><div class='text'>"
+                + "<div class='date'>" + formatDay(d.date) + "</div>"
+                + ((d.recipe.match(urlCheck)) ? ("<div class='name'><a href='" + d.recipe + "'>" + d.name + "</a></div>") : ("<div class='name'>" + d.name + "</div>"))
+                + "<div class='fill'>" + d.fill_1 + ((d.fill_2 != 'None' && d.fill_1 != d.fill_2) ? " and " + d.fill_2 : "") + ", " + ((d.crust === 1) ? "one crust" : "two crusts") + "</div>"
+                + ((d.notes) ? "<div class='notes'>" + d.notes + "</div>" : "")
+                + "<div class='is_pie'> — Is this pie? <br> — " + d.is_pie + "</div>"
+                + "<div class='alec'> — Will Alec eat it? <br> — " + d.alec + "</div></div>"
         }
 
     }
