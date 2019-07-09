@@ -38,16 +38,11 @@ function Triangle(props) {
         })
 
         popular_fills_names = popular_fills_names.filter(el => el != "None")
-
         //console.log("replaced with other", mydata)
-
         popular_fills_names.push("Other")
 
-        //drawListOfPies()
-
         const table = []
-        //let svg = d3.select("#root").append("svg")
-        //svg.attr("width", 500).attr("height", 500)
+
         const g_lines = svg.append("g").attr("class", "lines"),
             g_texts = svg.append("g").attr("class", "texts")
 
@@ -70,11 +65,9 @@ function Triangle(props) {
                 let filter = data.filter(el => ((el.mod_fill_1 == fill_1 && el.mod_fill_2 == fill_2) || (el.mod_fill_1 == fill_1 && el.mod_fill_2 == "None" && fill_1 == fill_2)))
                 let filter2 = data.filter(el => ((el.mod_fill_2 == fill_1 && el.mod_fill_1 == fill_2 && fill_1 != fill_2)))
 
-
-
                 g_texts.append("circle")
                     .attr("r", (d)=>(filter.length + filter2.length>0) ? 9 : 0)
-                    .attr("cx", xx * 15.5 + hor_gap + 10)
+                    .attr("cx", xx * 15.5 + hor_gap + 10 )
                     .attr("cy", i * 15.5 + j * 15.5 + start_y -4.5)
                     .classed( fill_1, true)
                     .classed( fill_2, true)
@@ -103,18 +96,18 @@ function Triangle(props) {
                 )
             }
 
-            g_lines.append("line")                         /*  \  */
-                .attr("x1", hor_gap_line)
+           if (i<popular_fills_names.length-1) g_lines.append("line")       /*  \  */
+                .attr("x1", hor_gap_line+1)
                 .attr("y1", i * 31 +15.5+5)
                 .attr("x2", xx * 15.5 + hor_gap_line - 15.5)
                 .attr("y2", i * 15.5 + j * 15.5+4)
                 .attr("class", fill_1)
 
-            g_lines.append("line")                         /*  /  */
-                .attr("x1", hor_gap_line)
+            if (i>0) g_lines.append("line")                                 /*  /  */
+                .attr("x1", hor_gap_line+1)
                 .attr("y1", i * 31 + 15.5+5)
                 .attr("x2", (i) * 15.5 + hor_gap_line)
-                .attr("y2", i * 31 - (7 - xx) * 15.5 +20)
+                .attr("y2", i * 31 - (7 - xx) * 15.5 +20+1)
                 .attr("class", fill_1)
 
         })
@@ -144,8 +137,6 @@ function Triangle(props) {
                     svg.selectAll("text").classed("hovered", false)
                     g_lines.selectAll("line").classed("hovered", false)
                     g_texts.selectAll("circle").classed("hovered", false)
-                   // pie_container.selectAll("span").style("color", "black")
-
                 })
         })
 

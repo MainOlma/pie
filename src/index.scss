@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Dancing+Script:400,700&display=swap');
+
 $font_abril: 'Abril Fatface', cursive;
 $font_dancing: 'Dancing Script', cursive;
-body,html {
+
+body, html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
@@ -13,17 +15,12 @@ body,html {
   padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.wrapper{
+.wrapper {
   display: flex;
-min-height: 100vh;
-
+  min-height: 100vh;
   flex-direction: row;
-  .left_side{
+
+  .left_side {
     display: flex;
     flex-direction: column;
     background-color: #492F29;
@@ -32,26 +29,26 @@ min-height: 100vh;
     padding: 32px 32px 32px;
 
 
-    .sticky_top{
+    .sticky_top {
       position: sticky;
       top: 32px;
       min-height: inherit;
     }
 
-    .sticky_bottom{
+    .sticky_bottom {
       position: sticky;
       bottom: 32px;
     }
 
-    .unsticky{
-      flex:1;
+    .unsticky {
+      flex: 1;
     }
 
-    h1,h2,h3{
+    h1, h2, h3 {
       margin: 0;
     }
 
-    h1{
+    h1 {
       font-family: $font_abril;
       font-size: 45px;
       font-weight: 400;
@@ -59,7 +56,7 @@ min-height: 100vh;
       margin: 0 0 5px;
     }
 
-    h2{
+    h2 {
       font-family: $font_dancing;
       font-size: 32px;
       font-weight: normal;
@@ -67,33 +64,37 @@ min-height: 100vh;
       margin-bottom: 35px;
     }
 
-    h3{
+    h3 {
       font-family: $font_abril;
       font-size: 25px;
       font-weight: normal;
       line-height: 34px;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
     }
 
-    .footer{
+    .footer {
       margin-top: auto;
       font-family: $font_dancing;
       font-size: 24px;
       line-height: 90%;
 
-      a{
+      a {
         color: inherit;
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, .5);
+        display: inline-block;
+        line-height: 0.85;
       }
     }
   }
-  .right_side{
+
+  .right_side {
     flex-direction: column;
     background: #F1F8FF;
-    padding-top: 14px;
+    padding-top: 50px;
 
-    .bottom{
-      height: 550px;
+    .bottom {
+      height: 380px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -103,59 +104,65 @@ min-height: 100vh;
       font-size: 32px;
       line-height: 29px;
       color: #492F29;
-
     }
   }
-  >div {display: flex;flex: 1;}
+
+  > div {
+    display: flex;
+    flex: 1;
+  }
 }
 
-.triangle{
-  .texts text{
-
+.triangle {
+  .texts text {
+    cursor: pointer;
     fill: white;
     text-anchor: middle;
     font-family: Arial;
     font-size: 16px;
 
-    &.hovered{
-      transition: all ease 0.5s;
-      fill:black;
+    &.hovered {
+      transition: all ease 0s;
+      fill: black;
     }
   }
 
-  text{
+  text {
+    cursor: pointer;
     font-family: $font_dancing;
     font-size: 32px;
     text-anchor: start;
     fill: white;
   }
 
-  line{
+  line {
     stroke-linecap: round;
     stroke-width: 0.5;
-    stroke:white;
-    &.hovered{
-      transition: all ease 0.1s;
+    stroke: white;
+
+    &.hovered {
+      transition: all ease 0s;
       stroke-width: 18;
     }
   }
 
-  circle{
-    fill:#492F29;
-    &.hovered{
-      transition: all ease 0.1s;
-      fill:white;
+  circle {
+    fill: #492F29;
+    cursor: pointer;
+
+    &.hovered {
+      transition: all ease 0s;
+      fill: white;
     }
   }
 
-  circle.hovered + text{
+  circle.hovered + text {
     fill: black;
   }
 
-
 }
 
-.pies{
+.pies {
   display: flex;
   flex-wrap: wrap;
   padding-right: 100px;
@@ -166,17 +173,17 @@ min-height: 100vh;
     height: 40px;
   }
 
-  .pies_in_month{
+  .pies_in_month {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
 
-  .pies_list{
+  .pies_list {
     display: flex;
   }
 
-  .month_name{
+  .month_name {
     font-family: $font_dancing;
     font-weight: bold;
     font-size: 24px;
@@ -185,184 +192,166 @@ min-height: 100vh;
     padding-top: 40px;
     align-items: center;
 
-    span.year{
+    span.year {
       display: none;
       font-weight: bold;
       font-size: 47.8482px;
       line-height: 57px;
 
-      &.visible{
+      &.visible {
         display: flex;
         justify-content: center;
         width: 134px;
       }
     }
 
-    span.month{
+    span.month {
       transform: rotate(-90deg);
       height: 0.4em;
 
     }
 
-    span.month_wrapper{
+    span.month_wrapper {
       align-items: center;
       display: flex;
       width: 44px;
       justify-content: center;
     }
   }
-  .wrapPie{
+
+  .wrapPie {
     margin-right: -46px;
   }
 
-  .invisibleNumber{
+  .invisibleNumber {
     opacity: 0;
+  }
+
+  .activeItem {
+    transition: all ease 0.5s;
+    opacity: 1;
+  }
+
+  .unactiveItem {
+    transition: all ease 0.5s;
+    opacity: 0.5;
+    -webkit-filter: blur(2px) grayscale(50%); /* Safari 6.0 - 9.0 */
+    filter: blur(2px) grayscale(50%);
   }
 }
 
-
-
-.activeItem {
-  transition: all ease 0.5s;
-  opacity: 1;
-}
-
-.unactiveItem {
-  transition: all ease 0.5s;
-  opacity: 0.5;
-  -webkit-filter: blur(2px) grayscale(50%); /* Safari 6.0 - 9.0 */
-  filter: blur(2px) grayscale(50%);
-}
-
-
-
-
-
-.pie{
+.pie {
+  border-radius: 999px;
+  position: relative;
   padding: 0px 3px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 24px;
 
-  .number{
+  .number {
     padding-bottom: 3px;
   }
 
-
-  img{
+  img {
     box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.5);
     border-radius: 357.076px;
   }
 
-  span{
+  span {
     font-family: Arial;
     font-size: 16px;
     line-height: 100%;
     font-weight: normal;
   }
-}
 
-.pie{
-  border-radius: 999px;
-  position: relative;
-}
-
-.details{
-  background: pink;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0s linear;
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  z-index: 2;
-
-  .text{
+  .details {
     background: pink;
-    // border: red 1px solid;
-    content: " ";
-    height: 0;
-    overflow-y: hidden;
-    left: 0%;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0s linear;
+    height: 100%;
     position: absolute;
-    top: 100%;
-    transition: height 200ms;
     width: 100%;
-
-
-    background: #FFFFFF;
-    box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.25);
-    border-radius: 0px 0px 16px 16px;
-    //width: 224px;
-
-    //margin-top: -128px;
-    padding-top: 88px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 23px;
-    border-top: none;
-    //z-index: 1;
-    color: #492F29;
-
-
-    .date{
-      font-family: Arial;
-      font-size: 12px;
-      line-height: 14px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .name, .name a{
-      font-family: $font_abril;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 25px;
-      line-height: 28px;
-      display: flex;
-      align-items: flex-end;
-      margin-bottom: 8px;
-      color: inherit;
-    }
-
-    .fill, .notes, .is_pie, .alec{
-      font-family: $font_dancing;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 24px;
-      line-height:22px;
-      margin-bottom: 0.2em;
-    }
-  }
-  .picture{
-    border-radius: 999px 999px 0 0;
-    content: " ";
-    height: 243%;
-    left: -88%;
-    pointer-events: none;
-    position: absolute;
-    top: -66%;
-    width: 282%;
     z-index: 2;
-    background: white;
-  }
-}
 
-.pie:hover {
-  .details{
-    visibility: visible;
-    opacity: 1;
-    .text{
-      height: 200%;
-      left: -88%;
+    .text {
+      background: pink;
+      height: 0;
+      overflow-y: hidden;
+      left: 0%;
+      position: absolute;
       top: 100%;
-      width: 247%;
-      display: block;
+      transition: height 200ms;
+      width: 100%;
+      background: #FFFFFF;
+      box-shadow: 5.71322px 5.71322px 11.4264px rgba(0, 0, 0, 0.25);
+      border-radius: 0px 0px 16px 16px;
+      //width: 224px;
+      padding: 103px 16px 23px;
+      border-top: none;
+      color: #492F29;
+
+      .date {
+        font-family: Arial;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .name, .name a {
+        font-family: $font_abril;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 25px;
+        line-height: 28px;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 8px;
+        color: inherit;
+      }
+
+      .fill, .notes, .is_pie, .alec {
+        font-family: $font_dancing;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 22px;
+        margin-bottom: 0.2em;
+      }
+    }
+
+    .picture {
+      border-radius: 999px 999px 0 0;
+      content: " ";
+      height: 243%;
+      left: -88%;
+      pointer-events: none;
+      position: absolute;
+      top: -66%;
+      width: 282%;
+      z-index: 2;
+      background: white;
+    }
+  }
+
+  &:hover {
+    .details {
+      visibility: visible;
+      opacity: 1;
+
+      .text {
+        height: auto;
+        left: -88%;
+        top: 100%;
+        width: 247%;
+        display: block;
+      }
     }
   }
 }
 
-#root{
+#root {
   font-family: $font_abril;
 }

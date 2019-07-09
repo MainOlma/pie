@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import './App.css';
 import pie from './img/no_image.png';
 
 import Triangle from "./Triangle";
@@ -36,7 +35,7 @@ function App() {
                         id: i,
                         name: el['Pie'],
                         date: parseDate(el['Date served']),
-                        alec: el['alec will eat it'],
+                        alec: el['alec will eat it'][0].toUpperCase() + el['alec will eat it'].slice(1),
                         crust: (el['one-crust'] && !el['two crust']) ? 1 : 2,
                         img: el[Image],
                         notes: el['Notes'],
