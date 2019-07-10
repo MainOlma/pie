@@ -57,9 +57,7 @@ function App() {
                 })
                 setData(mydata)
                 setFills(fills)
-
             })
-
         }
 
         fetchData();
@@ -93,7 +91,7 @@ function App() {
 
     const drawListOfPies = (data) => {
 
-        function importAll(r) {
+        function importAll(r) { /*import image folder*/
             let images = {};
             r.keys().map((item, index) => {
                 images[item.replace('./', '')] = r(item);
@@ -113,6 +111,8 @@ function App() {
 
         const month_div = pie_container.selectAll("div.pies_in_month").data(nested_by_date).enter().append("div").classed("pies_in_month", true)
 
+        month_div.append("div").classed("line_breaker only-for-the-phone", true)
+
         month_div.append("div").classed("month_name", true)
             .html((d) => {
                 const formatMonth = d3.timeFormat("%B")
@@ -120,7 +120,7 @@ function App() {
                 const parseTime = d3.timeParse("%Y %B")
                 const month = "<span class='month_wrapper'><span class='month'>" + formatMonth(parseTime(d.key)) + "</span></span>"
                 const year = "<span class='year year" + formatYear(parseTime(d.key)) + "'>" + formatYear(parseTime(d.key)) + "</span>"
-                return year + month
+                return year +  month
             })
 
         pie_container.selectAll(".year2018").filter((d, i) => i == 0).classed("visible", true)
@@ -236,8 +236,19 @@ function App() {
             </div>
         </div>
         <div className="right_side">
+            <div className="only-for-the-phone slogan">
+                <h1>The Pie Chart</h1>
+                <h2>The pies proudly eaten by the Stamen team</h2>
+            </div>
             <div className="pies" ref={pieContainer_ref}/>
             <div className="bottom">Well done! Keep going!</div>
+            <div className="only-for-the-phone">
+                <div className="footer">
+                    Made by <a href="https://kmpny.github.io">Kompany</a>, <a
+                    href="https://docs.google.com/spreadsheets/d/1npXQKNySYcRpiwp3-Iug3ncmCUS9F813LoxZQzSbVLU/edit#gid=0">data</a> collected
+                    by <a href="https://stamen.com">Stamen</a>
+                </div>
+            </div>
         </div>
 
     </div>);
