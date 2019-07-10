@@ -169,7 +169,7 @@ body, html {
   padding-left: 32px;
   @include for-phone-only{
     overflow: hidden;
-    padding: 0 10px 350px;
+    padding: 0 10px 50px;
   }
 
   .line_breaker {
@@ -348,6 +348,10 @@ body, html {
     .details {
       visibility: visible;
       opacity: 1;
+      @include for-phone-only{
+        visibility: hidden;
+        display: none;
+      }
 
       .text {
         height: auto;

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9124ca6-62a7-4c2c-b19f-f6647dbea90c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+            <state relative-caret-position="462">
+              <caret line="352" column="22" selection-start-line="352" selection-start-column="22" selection-end-line="352" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -209,12 +207,12 @@
       <workItem from="1562056106430" duration="18396000" />
       <workItem from="1562220472577" duration="20941000" />
       <workItem from="1562669610931" duration="7157000" />
-      <workItem from="1562753370316" duration="4543000" />
+      <workItem from="1562753370316" duration="5185000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163590000" />
+    <option name="totallyTimeSpent" value="164232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -354,8 +352,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        <state relative-caret-position="462">
+          <caret line="352" column="22" selection-start-line="352" selection-start-column="22" selection-end-line="352" selection-end-column="22" />
         </state>
       </provider>
     </entry>
